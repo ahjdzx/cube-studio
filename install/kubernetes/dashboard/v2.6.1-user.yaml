@@ -479,7 +479,7 @@ spec:
         - name: dashboard-user1-metrics-scraper
           securityContext:
             runAsUser: 0
-          image: kubernetesui/metrics-scraper:v1.0.8
+          image: docker.1ms.run/kubernetesui/metrics-scraper:v1.0.8
           ports:
             - containerPort: 8000
               protocol: TCP

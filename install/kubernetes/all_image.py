@@ -2,49 +2,49 @@ import json
 import os,re
 # 所需要的所有镜像
 kubeflow = [
-    'mysql:8.0.32',  # 数据库
-    'bitnami/redis:7.4',  # 缓存
-    "busybox:1.36.0",
-    "kubeflow/training-operator:v1-8a066f9",  # 分布式训练
-    'alpine:3.10',
+    'docker.1ms.run/mysql:8.0.32',  # 数据库
+    'docker.1ms.run/bitnami/redis:latest',  # 缓存
+    "docker.1ms.run/busybox:1.36.0",
+    "docker.1ms.run/kubeflow/training-operator:v1-8a066f9",  # 分布式训练
+    'docker.1ms.run/alpine:3.10',
 ]
 
 kubernetes_dashboard = [
-    'kubernetesui/dashboard:v2.6.1',  # k8s dashboard
+    'docker.1ms.run/kubernetesui/dashboard:v2.6.1',  # k8s dashboard
     'ccr.ccs.tencentyun.com/cube-studio/k8s-dashboard:v2.6.1',
-    'kubernetesui/metrics-scraper:v1.0.8',  # k8s dashboard 上的指标监控
+    'docker.1ms.run/kubernetesui/metrics-scraper:v1.0.8',  # k8s dashboard 上的指标监控
 ]
 
 new_gpu = [
-    'nvidia/k8s-device-plugin:v0.11.0-ubuntu20.04',  # gpu k8s插件
-    'nvidia/dcgm-exporter:3.1.7-3.1.4-ubuntu20.04',  # gpu监控
+    'docker.1ms.run/nvidia/k8s-device-plugin:v0.11.0-ubuntu20.04',  # gpu k8s插件
+    'docker.1ms.run/nvidia/dcgm-exporter:3.1.7-3.1.4-ubuntu20.04',  # gpu监控
 ]
 
 new_prometheus = [
-    "prom/prometheus:v2.27.1",  # peomethues数据库
-    'prom/node-exporter:v1.5.0',  # 机器指标
+    "docker.1ms.run/prom/prometheus:v2.27.1",  # peomethues数据库
+    'docker.1ms.run/prom/node-exporter:v1.5.0',  # 机器指标
 
     'quay.io/prometheus-operator/prometheus-config-reloader:v0.46.0',  # prometheus配置翻译
     "quay.io/prometheus-operator/prometheus-operator:v0.46.0",  # prometheus 部署工具
-    'ccr.ccs.tencentyun.com/cube-studio/kube-rbac-proxy:0.14.1',  # 指标
-    'carlosedp/addon-resizer:v1.8.4',  # 指标
+    'docker.1ms.run/kubebuilder/kube-rbac-proxy:v0.14.1',  # 指标
+    'docker.1ms.run/carlosedp/addon-resizer:v1.8.4',  # 指标
 
-    'grafana/grafana:9.5.20',  # 监控看板
+    'docker.1ms.run/grafana/grafana:9.5.20',  # 监控看板
     "ccr.ccs.tencentyun.com/cube-studio/prometheus-adapter:v0.9.1",  # peometheus指标翻译为自定义指标
 ]
 
 istio = [
-    "istio/proxyv2:1.15.0",  # ingressgateway
-    "istio/pilot:1.15.0"  # 数据面
+    "docker.1ms.run/istio/proxyv2:1.15.0",  # ingressgateway
+    "docker.1ms.run/istio/pilot:1.15.0"  # 数据面
 ]
 volcano = [
-    'volcanosh/vc-controller-manager:v1.7.0',  # 控制器
-    'volcanosh/vc-scheduler:v1.7.0',  # 调度器
-    'volcanosh/vc-webhook-manager:v1.7.0'  # 拦截器
+    'docker.1ms.run/volcanosh/vc-controller-manager:v1.7.0',  # 控制器
+    'docker.1ms.run/volcanosh/vc-scheduler:v1.7.0',  # 调度器
+    'docker.1ms.run/volcanosh/vc-webhook-manager:v1.7.0'  # 拦截器
 ]
 
 pipeline = [
-    'minio/minio:RELEASE.2023-04-20T17-56-55Z',
+    'docker.1ms.run/minio/minio:RELEASE.2023-04-20T17-56-55Z',
     'ccr.ccs.tencentyun.com/cube-argoproj/argoexec:v3.4.3',
     'ccr.ccs.tencentyun.com/cube-argoproj/workflow-controller:v3.4.3',
     'ccr.ccs.tencentyun.com/cube-argoproj/argocli:v3.4.3'
@@ -65,7 +65,7 @@ cube_studio = [
     # 超参搜索的镜像
     'ccr.ccs.tencentyun.com/cube-studio/nni:20240501',
     # 内部服务镜像
-    "phpmyadmin:5.2.1",
+    "docker.1ms.run/phpmyadmin:5.2.1",
     # "ccr.ccs.tencentyun.com/cube-studio/patrikx3:latest",
     # "mongo-express:0.54.0",
     # "ccr.ccs.tencentyun.com/cube-studio/neo4j:4.4",
@@ -110,9 +110,9 @@ cube_studio = [
 
 user_image = [
     # 任务模板的镜像
-    "ubuntu:20.04",
-    'python:3.9',
-    'docker:23.0.4',
+    "docker.1ms.run/ubuntu:20.04",
+    'docker.1ms.run/python:3.9',
+    'docker.1ms.run/docker:23.0.4',
 
     # 用户可能使用的基础镜像
     'ccr.ccs.tencentyun.com/cube-studio/ubuntu-gpu:cuda11.8.0-cudnn8-python3.9',
